@@ -1,7 +1,24 @@
 <?php
 require_once('./db/connect.php');
-$sql = "select * from san_pham where danh_muc=N'sale'";
+
+$sql_so_san_pham="select count(*) from san_pham where danh_muc=N'Trang Điểm'";
+$arr_so_san_pham=mysqli_query($connect,$sql_so_san_pham);
+$ket_qua=mysqli_fetch_array($arr_so_san_pham);
+$so_san_pham=$ket_qua['count(*)'];
+$so_san_pham_mot_trang=8;
+$so_trang=ceil($so_san_pham / $so_san_pham_mot_trang);
+
+$trang="";
+if(isset($_GET['trang'])){
+    $trang=$_GET['trang'];
+}else{
+    $trang=1;
+}
+$bo_qua=$so_san_pham_mot_trang*($trang-1);
+
+$sql = "select * from san_pham where danh_muc=N'Trang Điểm' limit $so_san_pham_mot_trang offset $bo_qua";
 $result = mysqli_query($connect, $sql);
+
 ?>
 <?php foreach ($result as $value) : ?>
     <div class="col-xs-6 col-sm-3">

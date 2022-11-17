@@ -2,7 +2,7 @@
 Template Name: Eshop
 Author Name: Naimur Rahman
 Author URI: http://www.wpthemesgrid.com/
-Description: THEGIOISUA.COM
+Description: SKINLELE.COM
 Version:1.0
 ========================================*/
 /*======================================
@@ -4276,7 +4276,8 @@ section .hero-slider img {
 .pagination {
 	text-align: left;
 	margin: 50px 0 0 0;
-	display: block;
+	display: flex;
+	justify-content: center;
 }
 
 .pagination.center {

@@ -1,13 +1,13 @@
 <?php
 require_once('./db/connect.php');
-$sql = "select * from san_pham where danh_muc=N'sale'";
-$result = mysqli_query($connect, $sql);
+$sql1 = "select * from san_pham where danh_muc=N'Chăm Sóc Da' and id >=18 and id<=21 ";
+$result1 = mysqli_query($connect, $sql1);
 ?>
-<?php foreach ($result as $value) : ?>
-    <div class="col-xs-6 col-sm-3">
+<?php foreach ($result1 as $value) : ?>
+<div class="col-xl-3 col-lg-4 col-md-4 col-12">
         <div class="single-product">
             <div class="product-img">
-                <a href="product-details.php?id=<?php echo $value['id'] ?>">
+                <a href="product-details.php">
                     <img class="default-img" src="<?php echo $value['anh'] ?>" alt="#">
                     <img class="hover-img" src="<?php echo $value['anh'] ?>" alt="#">
                 </a>
@@ -42,8 +42,9 @@ $result = mysqli_query($connect, $sql);
                             line-height: 1.6rem;
                             margin-top: 10px;"><?php echo $value['mo_ta'] ?></p>
                 <div class="product-price">
-                    <span style="color: #74140d;font-weight: bold;font-size: 18px;"><?php echo $value['gia'] ?> đ</span>
+                    <span style="color: gray;text-decoration: line-through;"><?php echo $value['gia'] ?> đ</span>
                 </div>
+                <p style="color:#820813;font-weight: bold;font-size: 18px;"><?php echo $value['khuyen_mai'] ?> đ</p>
             </div>
         </div>
     </div>
