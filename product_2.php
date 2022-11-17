@@ -81,11 +81,11 @@
             </div>
         </div>
     </div>
-    <?php
+    
+</body>
+<?php
     include 'component/footer.php'
     ?>
-</body>
-
 <?php include('jquery.php') ?>
 
 </html>

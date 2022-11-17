@@ -5,7 +5,7 @@ $sql_so_san_pham="select count(*) from san_pham where danh_muc=N'Chăm Sóc Da'"
 $arr_so_san_pham=mysqli_query($connect,$sql_so_san_pham);
 $ket_qua=mysqli_fetch_array($arr_so_san_pham);
 $so_san_pham=$ket_qua['count(*)'];
-$so_san_pham_mot_trang=8;
+$so_san_pham_mot_trang=9;
 $so_trang=ceil($so_san_pham / $so_san_pham_mot_trang);
 
 $trang="";
@@ -21,7 +21,7 @@ $result = mysqli_query($connect, $sql);
 
 ?>
 <?php foreach ($result as $value) : ?>
-    <div class="col-xs-6 col-sm-3">
+    <div class="col-xs-6 col-sm-4">
         <div class="single-product">
             <div class="product-img">
                 <a href="product-details.php?id=<?php echo $value['id'] ?>">

@@ -4,7 +4,7 @@ $sql1 = "select * from san_pham where danh_muc=N'topsale' and id >=9 and id<=12 
 $result1 = mysqli_query($connect, $sql1);
 ?>
 <?php foreach ($result1 as $value) : ?>
-<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+<div class="col-xl-3 col-lg-3 col-md-4 col-12">
         <div class="single-product">
             <div class="product-img">
                 <a href="product-details.php">
