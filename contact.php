@@ -15,7 +15,7 @@ if (count($idList) > 0) {
     $idList = implode(',', $idList);
 
 
-    $sql = "select * from products where id in ($idList) ";
+    $sql = "select * from san_pham where id in ($idList) ";
     $cartList = executeResult($sql);
 } else {
     $cartList = [];

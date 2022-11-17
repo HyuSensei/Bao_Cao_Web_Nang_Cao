@@ -15,7 +15,7 @@ if (count($idList) > 0) {
     $idList = implode(',', $idList);
 
 
-    $sql = "select * from products where id in ($idList) ";
+    $sql = "select * from san_pham where id in ($idList) ";
     $cartList = executeResult($sql);
 } else {
     $cartList = [];
@@ -78,10 +78,10 @@ if (count($idList) > 0) {
                     <table class="table shopping-summery">
                         <thead>
                             <tr class="main-hading">
-                                <th>PRODUCT</th>
-                                <th>NAME</th>
-                                <th class="text-center">UNIT PRICE</th>
-                                <th class="text-center">NUM</th>
+                                <th>SẢN PHẨM</th>
+                                <th>TÊN</th>
+                                <th class="text-center">ĐƠN GIÁ</th>
+                                <th class="text-center">SỐ LƯỢNG</th>
                                 <th class="text-center"><i class="ti-trash remove-icon"></i></th>
                             </tr>
                         </thead>
@@ -98,14 +98,14 @@ if (count($idList) > 0) {
                                         break;
                                     }
                                 }
-                                $total  += $num * $item['price'];
+                                $total  += $num * $item['khuyen_mai'];
                                 echo '<tr>
-                                <td class="image" data-title="No"><img src="' . $item['thumbnail'] . '" alt="#"></td>
+                                <td class="image" data-title="No"><img src="' . $item['anh'] . '" alt="#"></td>
                                 <td class="product-des" data-title="Description">
-                                    <p class="product-name"><a href="#">' . $item['title'] . '</a></p>
-                                    <p class="product-des">' . $item['content'] . '</p>
+                                    <p class="product-name"><a href="#">' . $item['ten_san'] . '</a></p>
+                                    <p class="product-des">' . $item['mo_ta'] . '</p>
                                 </td>
-                                <td class="price" data-title="Price"><span>$' . $item['price'] . '</span></td>
+                                <td class="price" data-title="Price"><span>$' . $item['khuyen_mai'] . '</span></td>
                                 <td class="total-amount" data-title="Total"><span>' . $num . '</span></td>
                                 <td class="action" data-title="Remove"><a href="#" onclick="deleteCart(' . $item['id'] . ')"><i class="ti-trash remove-icon" ></i></a></td>
                                 ';
@@ -127,12 +127,12 @@ if (count($idList) > 0) {
                                 <div class="left">
                                     <div class="coupon">
                                         <form action="#" target="_blank">
-                                            <input name="Coupon" placeholder="Enter Your Coupon">
-                                            <button class="btn">Apply</button>
+                                            <input name="Coupon" placeholder="Nhập phiếu giảm giá của bạn">
+                                            <button class="btn">Áp Dụng</button>
                                         </form>
                                     </div>
                                     <div class="checkbox">
-                                        <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Shipping (+10$)</label>
+                                        <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox"> Vận chuyển (+10000 đ)</label>
                                     </div>
                                 </div>
                             </div>
@@ -151,20 +151,20 @@ if (count($idList) > 0) {
                                                 break;
                                             }
                                         }
-                                        $total  += $num * $item['price'];
+                                        $total  += $num * $item['khuyen_mai'];
 
                                         echo ' <ul>
-                                <li>Cart Subtotal<span>$' . $item['price'] . '</span></li>
-                                <li>Shipping<span>Free</span></li>
-                                <li>You Save<span>$5.00</span></li>
-                                <li class="last">You Pay<span>$' . $item['price'] . '</span></li>
+                                <li>Tổng phụ của giỏ hàng<span>$' . $item['khuyen_mai'] . '</span></li>
+                                <li>Đang chuyển hàng<span>Free</span></li>
+                                <li>Bạn Lưu<span>$5.00</span></li>
+                                <li class="last">Bạn trả tiền<span>$' . $item['khuyen_mai'] . '</span></li>
                             </ul>
                                 ';
                                     }
                                     ?>
                                     <div class="button5">
-                                        <a href="checkout.php" class="btn">Checkout</a>
-                                        <a href="home.php" class="btn">Continue shopping</a>
+                                        <a href="checkout.php" class="btn">Thủ Tục Thanh Toán</a>
+                                        <a href="index.php" class="btn">Tiếp Tục Mua Hàng</a>
                                     </div>
                                 </div>
                             </div>
@@ -185,8 +185,8 @@ if (count($idList) > 0) {
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-rocket"></i>
-                        <h4>Free shiping</h4>
-                        <p>Orders over $100</p>
+                        <h4>MIỄN PHÍ VẬN CHUYỂN</h4>
+                        <p>Đơn hàng trên 300000</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -194,8 +194,8 @@ if (count($idList) > 0) {
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-reload"></i>
-                        <h4>Free Return</h4>
-                        <p>Within 30 days returns</p>
+                        <h4>TRẢ LẠI MIỄN PHÍ</h4>
+                        <p>Trong vòng 30 ngày trở lại</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -203,8 +203,8 @@ if (count($idList) > 0) {
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-lock"></i>
-                        <h4>Sucure Payment</h4>
-                        <p>100% secure payment</p>
+                        <h4>THANH TOÁN CHẮC CHẮN</h4>
+                        <p>Thanh toán an toàn 100%</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -212,8 +212,8 @@ if (count($idList) > 0) {
                     <!-- Start Single Service -->
                     <div class="single-service">
                         <i class="ti-tag"></i>
-                        <h4>Best Peice</h4>
-                        <p>Guaranteed price</p>
+                        <h4>SẢN PHẨM TỐT NHẤT</h4>
+                        <p>đảm bảo giá</p>
                     </div>
                     <!-- End Single Service -->
                 </div>
@@ -230,10 +230,10 @@ if (count($idList) > 0) {
                     <div class="col-lg-8 offset-lg-2 col-12">
                         <!-- Start Newsletter Inner -->
                         <div class="inner">
-                            <h4>Newsletter</h4>
-                            <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+                            <h4>BẢN TIN</h4>
+                            <p> Đăng ký nhận bản tin của chúng tôi và nhận <span>10%</span> cho lần mua hàng đầu tiên của bạn</p>
                             <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-                                <input name="EMAIL" placeholder="Your email address" required="" type="email">
+                                <input name="EMAIL" placeholder="Địa chit email của bạn" required="" type="email">
                                 <button class="btn">Subscribe</button>
                             </form>
                         </div>
@@ -360,98 +360,7 @@ if (count($idList) > 0) {
     </div>
     <!-- Modal end -->
 
-    <!-- Start Footer Area -->
-    <footer class="footer">
-        <!-- Footer Top -->
-        <div class="footer-top section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-6 col-12">
-                        <!-- Single Widget -->
-                        <div class="single-footer about">
-                            <div class="logo">
-                                <a href="index.php"><img src="images/logo2.png" alt="#"></a>
-                            </div>
-                            <p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
-                            <p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>
-                        </div>
-                        <!-- End Single Widget -->
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-12">
-                        <!-- Single Widget -->
-                        <div class="single-footer links">
-                            <h4>Information</h4>
-                            <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Faq</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Help</a></li>
-                            </ul>
-                        </div>
-                        <!-- End Single Widget -->
-                    </div>
-                    <div class="col-lg-2 col-md-6 col-12">
-                        <!-- Single Widget -->
-                        <div class="single-footer links">
-                            <h4>Customer Service</h4>
-                            <ul>
-                                <li><a href="#">Payment Methods</a></li>
-                                <li><a href="#">Money-back</a></li>
-                                <li><a href="#">Returns</a></li>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                        <!-- End Single Widget -->
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Single Widget -->
-                        <div class="single-footer social">
-                            <h4>Get In Tuch</h4>
-                            <!-- Single Widget -->
-                            <div class="contact">
-                                <ul>
-                                    <li>NO. 342 - London Oxford Street.</li>
-                                    <li>012 United Kingdom.</li>
-                                    <li>info@eshop.com</li>
-                                    <li>+032 3456 7890</li>
-                                </ul>
-                            </div>
-                            <!-- End Single Widget -->
-                            <ul>
-                                <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a href="#"><i class="ti-twitter"></i></a></li>
-                                <li><a href="#"><i class="ti-flickr"></i></a></li>
-                                <li><a href="#"><i class="ti-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- End Single Widget -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Footer Top -->
-        <div class="copyright">
-            <div class="container">
-                <div class="inner">
-                    <div class="row">
-                        <div class="col-lg-6 col-12">
-                            <div class="left">
-                                <p>Copyright © 2020 <a href="http://www.wpthemesgrid.com" target="_blank">Wpthemesgrid</a> - All Rights Reserved.</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="right">
-                                <img src="images/payments.png" alt="#">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- /End Footer Area -->
+    <?php include('./component/footer.php') ?>
     <script type="text/JavaScript">
         function deleteCart(id) {
         $.post('api/cookie.php', {
@@ -462,7 +371,7 @@ if (count($idList) > 0) {
         })
     }
 </script>
-<?php include('jquery.php') ?>
+    <?php include('jquery.php') ?>
 </body>
 
 </html>

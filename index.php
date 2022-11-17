@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,7 +130,7 @@
                 <div class="modal-body">
                     <div class="row no-gutters">
                         <div class="col-lg-6 offset-lg-3 col-12">
-                            <h4 style="margin-top:100px;font-size:14px; font-weight:500; color:#F7941D; display:block; margin-bottom:5px;">Eshop Free Lite</h4>
+                            <h4 style="margin-top:100px;font-size:14px; font-weight:500; color:#e28585; display:block; margin-bottom:5px;">Eshop Free Lite</h4>
                             <h3 style="font-size:30px;color:#333;">Currently You are using free lite Version of Eshop.<h3>
                                     <p style="display:block; margin-top:20px; color:#888; font-size:14px; font-weight:400;">Please, purchase full version of the template to get all pages, features and commercial license</p>
                                     <div class="button" style="margin-top:30px;">
@@ -144,9 +143,11 @@
         </div>
     </div>
     <?php
-        include 'component/footer.php'
+    include 'component/footer.php'
     ?>
-     <?php include('jquery.php') ?>
+    <?php include('jquery.php') ?>
 </body>
+
+
 
 </html>

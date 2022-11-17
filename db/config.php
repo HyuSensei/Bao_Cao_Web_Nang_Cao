@@ -2,7 +2,7 @@
 define('HOST', 'localhost');
 define('USERNAME', 'root');
 define('PASSWORD', '');
-define('DATABASE', 'buy_sell_php');
+define('DATABASE', 'skinlele');
 
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);

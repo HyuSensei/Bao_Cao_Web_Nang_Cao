@@ -2,10 +2,11 @@
 require_once('utils/utility.php');
 require_once('db/dbhelper.php');
 
+
 $id = getGet('id');
-$product = executeResult('select * from products where id = ' . $id, true);
+$product = executeResult('select * from san_pham where id = ' . $id, true);
 if ($product == null) {
-    header('Location: home.php');
+    header('Location: index.php');
     die;
 }
 
@@ -18,225 +19,150 @@ if ($product == null) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>SKINLELE.COM</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/detail_product.css">
+
+    <style>
+        .container {
+            color: #424646;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 47px;
+        }
+    </style>
+
 </head>
 
 <body>
-    <header class="header shop">
-        <!-- Topbar -->
-        <div class="topbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-5 col-md-12 col-12">
-                        <!-- Top Left -->
-                        <div class="top-left">
-                            <ul class="list-main">
-                                <li><i class="ti-headphone-alt"></i> +060 (800) 801-582</li>
-                                <li><i class="ti-email"></i> support@shophub.com</li>
-                            </ul>
-                        </div>
-                        <!--/ End Top Left -->
-                    </div>
-                    <div class="col-lg-7 col-md-12 col-12">
-                        <!-- Top Right -->
-                        <div class="right-content">
-                            <ul class="list-main">
-                                <li><i class="ti-location-pin"></i> Store location</li>
-                                <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-                                <li><i class="ti-user"></i> <a href="#">My account</a></li>
-                                <li><i class="ti-power-off"></i><a href="database/login.php">Login</a></li>
-                            </ul>
-                        </div>
-                        <!-- End Top Right -->
+    <?php
+    include('./component/header_2.php');
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="sliders">
+                    <div class="item">
+                        <img width="85%" style="margin-bottom: 40px;" src="<?= $product['anh'] ?>" />
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- End Topbar -->
-        <div class="middle-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2 col-md-2 col-12">
-                        <!-- Logo -->
-                        <div class="logo">
-                            <a href="index.php"><img src="images/rsz_storeball.png" alt="logo"></a>
-                        </div>
-                        <!--/ End Logo -->
-                        <!-- Search Form -->
-                        <div class="search-top">
-                            <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
-                            <!-- Search Form -->
-                            <div class="search-top">
-                                <form class="search-form">
-                                    <input type="text" placeholder="Search here..." name="search">
-                                    <button value="search" type="submit"><i class="ti-search"></i></button>
-                                </form>
-                            </div>
-                            <!--/ End Search Form -->
-                        </div>
-                        <!--/ End Search Form -->
-                        <div class="mobile-nav"></div>
-                    </div>
-                    <div class="col-lg-8 col-md-7 col-12">
-                        <div class="search-bar-top">
-                            <div class="search-bar">
-                                <select>
-                                    <option selected="selected">All Category</option>
-                                    <option>watch</option>
-                                    <option>mobile</option>
-                                    <option>kid’s item</option>
-                                </select>
-                                <form>
-                                    <input name="search" placeholder="Search Products Here....." type="search">
-                                    <button class="btnn"><i class="ti-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-12">
-                        <div class="right-bar">
-                            <!-- Search Form -->
-                            <div class="sinlge-bar">
-                                <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="sinlge-bar">
-                                <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="sinlge-bar shopping">
-                                <?php
-                                $cart = [];
-                                if (isset($_COOKIE['cart'])) {
-                                    $json = $_COOKIE['cart'];
-                                    $cart = json_decode($json, true);
-                                }
-                                $count = 0;
-                                foreach ($cart as $item) {
-                                    $count += $item['num'];
-                                }
-                                ?>
-                                <a href="cart.php" class="single-icon"><i class="ti-bag"></i> <span class="total-count"><?= $count ?></span></a>
-                                <!-- Shopping Item -->
 
-                                <!-- <div class="shopping-item">
-                                    <div class="dropdown-cart-header">
-                                        <span>2 Items</span>
-                                        <a href="#">View Cart</a>
-                                    </div>
-                                    <ul class="shopping-list">
-                                        <li>
-                                            <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                            <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-                                            <h4><a href="#">Woman Ring</a></h4>
-                                            <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-                                            <a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-                                            <h4><a href="#">Woman Necklace</a></h4>
-                                            <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                        </li>
-                                    </ul>
-                                    <div class="bottom">
-                                        <div class="total">
-                                            <span>Total</span>
-                                            <span class="total-amount">$134.00</span>
-                                        </div>
-                                        <a href="checkout.php" class="btn animate">Checkout</a>
-                                    </div>
-                                </div> -->
-                                <!--/ End Shopping Item -->
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div>
-        <!-- Header Inner -->
-        <div class="header-inner">
-            <div class="container">
-                <div class="cat-nav-head">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="menu-area">
-                                <!-- Main Menu -->
-                                <nav class="navbar navbar-expand-lg">
-                                    <div class="navbar-collapse">
-                                        <div class="nav-inner">
-                                            <ul class="nav main-menu menu navbar-nav">
-                                                <li class="active"><a href="#">Home</a></li>
-                                                <li><a href="#">Product</a></li>
-                                                <li><a href="#">Service</a></li>
-                                                <li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="cart.php">Cart</a></li>
-                                                        <li><a href="checkout.php">Checkout</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">Pages</a></li>
-                                                <li><a href="#">Blog<i class="ti-angle-down"></i></a>
-                                                    <ul class="dropdown">
-                                                        <li><a href="blog-single-sidebar.php">Blog Single Sidebar</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact.php">Contact Us</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </nav>
-                                <!--/ End Main Menu -->
+            <div class="col-md-6">
+                <div class="product-dtl">
+                    <div class="product-info">
+                        <div class="product-name"><?= $product['ten_san'] ?></div>
+                        <div class="reviews-counter">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" checked />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" checked />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" checked />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
                             </div>
+                            <span>3 Reviews</span>
                         </div>
+                        <div class="product-price-discount"><span><?= $product['gia'] ?></span><span class="line-through"><?= $product['khuyen_mai'] ?></span></div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <!--/ End Header Inner -->
-    </header>
-    <!--/ End Header -->
-
-    <div class="container mt-5 mb-5">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
+                    <p><?= $product['mo_ta'] ?></p>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="images p-3">
-                                <div class="text-center p-4"> <img id="main-image" src="<?= $product['thumbnail'] ?>" width="400" /> </div>
-                                <!-- <div class="thumbnail text-center"> <img onclick="change_image(this)" src="images/img-sneaker-02.jpg" width="70"> <img onclick="change_image(this)" src="images/img-sneaker-03.jpg" width="70"> </div> -->
-                            </div>
+                            <label for="size">Size</label>
+                            <select id="size" name="size" class="form-control">
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
-                            <div class="product p-4">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div>
-                                </div>
-                                <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Orianz</span>
-                                    <h5 class="text-uppercase"><?= $product['title'] ?></h5>
-                                    <div class="price d-flex flex-row align-items-center"> <span class="act-price">$<?= $product['price'] ?></span>
-                                        <div class="ml-2"> <small class="dis-price">$59</small> <span>40% OFF</span> </div>
-                                    </div>
-                                </div>
-                                <p class="about"><?= $product['content'] ?></p>
-                                <!-- <div class="sizes mt-5">
-                                    <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
-                                </div> -->
-                                <div class="cart mt-4 align-items-center"> <button class="btn btn-danger text-uppercase mr-2 px-4" onclick="addToCart(<?= $id ?>)">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
-                            </div>
+                            <label for="color">Color</label>
+                            <select id="color" name="color" class="form-control">
+                                <option>Blue</option>
+                                <option>Green</option>
+                                <option>Red</option>
+                            </select>
                         </div>
                     </div>
+                    <div class="product-count">
+                        <label for="size">Quantity</label>
+                        <form action="#" class="display-flex">
+                            <a class="qtyminus">-</a>
+                            <input type="text" name="quantity" value="1" class="qty">
+                            <a class="qtyplus">+</a>
+                        </form>
+                        <div class="cart mt-4 align-items-center"> <button class="btn btn-danger text-uppercase mr-2 px-4" onclick="addToCart(<?= $id ?>)">Add to cart</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-info-tabs">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews (0)</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
+                </div>
+                <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                    <div class="review-heading">REVIEWS</div>
+                    <p class="mb-20">There are no reviews yet.</p>
+                    <form class="review-form">
+                        <div class="form-group">
+                            <label>Your rating</label>
+                            <div class="reviews-counter">
+                                <div class="rate">
+                                    <input type="radio" id="star5" name="rate" value="5" />
+                                    <label for="star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4" />
+                                    <label for="star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3" />
+                                    <label for="star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2" />
+                                    <label for="star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1" />
+                                    <label for="star1" title="text">1 star</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Your message</label>
+                            <textarea class="form-control" rows="10"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="" class="form-control" placeholder="Name*">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="" class="form-control" placeholder="Email Id*">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="round-black-btn">Submit Review</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <script type="text/JavaScript">
         function addToCart(id) {
-        $.post('api/cookie.php', {
+        $.post('./api/cookie.php', {
             'action' : 'add',
             'id' : id,
             'num' : 1
@@ -244,18 +170,12 @@ if ($product == null) {
             location.reload()
         })
     }
-</script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
-        function change_image(image) {
-
-            var container = document.getElementById("main-image");
-
-            container.src = image.src;
-        }
-        document.addEventListener("DOMContentLoaded", function(event) {});
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="./js/detail.js"></script>
     <?php
     include 'component/footer.php'
     ?>

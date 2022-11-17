@@ -7,7 +7,7 @@ $result = mysqli_query($connect, $sql);
     <div class="col-xs-6 col-sm-3">
         <div class="single-product">
             <div class="product-img">
-                <a href="product-details.php?id=<?php echo $value['id'] ?>">
+                <a href="../product-details.php?id=<?php echo $value['id'] ?>">
                     <img class="default-img" src="<?php echo $value['anh'] ?>" alt="#">
                     <img class="hover-img" src="<?php echo $value['anh'] ?>" alt="#">
                 </a>

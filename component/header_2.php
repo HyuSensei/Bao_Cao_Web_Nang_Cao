@@ -1,3 +1,31 @@
+<?php
+session_start();
+require_once('utils/utility.php');
+require_once('db/dbhelper.php');
+include 'database/database.php';
+
+$cart = [];
+if (isset($_COOKIE['cart'])) {
+    $json = $_COOKIE['cart'];
+    $cart = json_decode($json, true);
+}
+$idList = [];
+foreach ($cart as $item) {
+    $idList[] = $item['id'];
+}
+if (count($idList) > 0) {
+    $idList = implode(',', $idList);
+
+
+    $sql = "select * from san_pham where id in ($idList) ";
+    $cartList = executeResult($sql);
+} else {
+    $cartList = [];
+}
+
+?>
+
+
 <style>
     .list-main li :hover {
         font-weight: bold;
@@ -103,7 +131,7 @@
                                 $count += $item['num'];
                             }
                             ?>
-                            <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count"><?= $count ?></span></a>
+                            <a href="../cart.php" class="single-icon"><i class="ti-bag"></i> <span class="total-count"><?= $count ?></span></a>
                             <!-- Shopping Item -->
                             <div class="shopping-item">
                                 <?php
@@ -118,24 +146,23 @@
                                             break;
                                         }
                                     }
-                                    $total  += $num * $item['price'];
+                                    $total  += $num * $item['khuyen_mai'];
                                     echo '<ul class="shopping-list">
                                         <li>
                                         <a href="#" onclick="deleteCart(' . $item['id'] . ')"><i class="ti-trash remove-icon" ></i></a>
-                                            <a class="cart-img" href="#"><img src="' . $item['thumbnail'] . '" alt="#"></a>
-                                            <p class="quantity">1x - <span class="amount">$' . $item['price'] . '</span></p>
+                                            <a class="cart-img" href="#"><img src="' . $item['anh'] . '" alt="#"></a>
+                                            <p class="quantity">1x - <span class="amount">' . $item['khuyen_mai'] . 'đ</span></p>
                                         </li>
                                     </ul>
                                     <div class="bottom">
                                         <div class="total">
                                             <span>Total</span>
-                                            <span class="total-amount">$134.00</span>
+                                            <span class="total-amount">' . $total . '</span>
                                         </div>
-                                        <a href="checkout.php" class="btn animate">Checkout</a>
                                     </div>';
                                 }
                                 ?>
-
+                                <a href="checkout.php" class="btn animate">Checkout</a>
                             </div>
                             <!--/ End Shopping Item -->
                         </div>

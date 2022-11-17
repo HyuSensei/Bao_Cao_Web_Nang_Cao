@@ -4,10 +4,10 @@ $sql1 = "select * from san_pham where danh_muc=N'Chăm Sóc Da' and id >=18 and 
 $result1 = mysqli_query($connect, $sql1);
 ?>
 <?php foreach ($result1 as $value) : ?>
-<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
         <div class="single-product">
             <div class="product-img">
-                <a href="product-details.php">
+                <a href="product-details.php?id=<?php echo $value['id'] ?>">
                     <img class="default-img" src="<?php echo $value['anh'] ?>" alt="#">
                     <img class="hover-img" src="<?php echo $value['anh'] ?>" alt="#">
                 </a>
